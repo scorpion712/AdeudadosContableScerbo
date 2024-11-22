@@ -1,0 +1,1 @@
+export const axiosLoadAbort = () => new AbortController();
