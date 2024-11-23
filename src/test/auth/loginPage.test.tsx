@@ -81,7 +81,7 @@ describe('Login Page', () => {
 
     it('renders the login form', () => {
         expect(screen.getByText('Bienvenido')).toBeInTheDocument();
-        expect(screen.getByText('¿Todavía no estas registrado?')).toBeInTheDocument();
+        // expect(screen.getByText('¿Todavía no estas registrado?')).toBeInTheDocument();
         expect(screen.getByText('Registrate')).toBeInTheDocument();
         expect(screen.getByText('¿Olvidaste tu contraseña?')).toBeInTheDocument();
         expect(emailField).toBeInTheDocument();

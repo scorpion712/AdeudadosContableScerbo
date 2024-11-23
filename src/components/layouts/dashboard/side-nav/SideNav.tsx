@@ -78,7 +78,7 @@ export const SideNav = () => {
                 <Divider />
                 <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <Typography variant="caption" align='center' gutterBottom mt={1}>
-                        Initial Template
+                        Estudio Contable Paula Scerbo
                     </Typography>
                 </Box>
             </Box>

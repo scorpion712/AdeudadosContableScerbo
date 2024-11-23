@@ -12,19 +12,19 @@ export const Layout = (props: { children: ReactNode | ReactNode[] }) => {
         >
             <Grid2 size={{ xs: 12, lg: 8 }}
                 sx={{
-                    alignItems: "stretch",
+                    alignItems: "center",
                     background: `radial-gradient(100% 60% at 50% 0%, ${primary.main} 50%, ${primary.lightest} 100%)`,
                     color: "white",
                     display: "flex",
+                    justifyContent: "center",
                 }}
             >
                 <Box sx={{
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    padding: { xs: 5, lg: 30 },
+                    justifyContent: "center", 
                 }}>
-                    <img src="https://www.sbi-technology.com/assets/images/sitio/logo.svg" alt="img not found" style={{
+                    <img src="../logo_scerbo.png" alt="img not found" style={{
                         width: "100%",
                     }} />
                 </Box>

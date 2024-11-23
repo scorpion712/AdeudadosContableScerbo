@@ -99,7 +99,7 @@ export const MobileNav = (props: MobileNavProps) => {
             <Box sx={{ p: 3 }}>
                 <Divider />
                 <Typography variant="caption">
-                    Initial Template
+                    Estudio Contable Paula Scerbo
                 </Typography>
             </Box>
         </Drawer>

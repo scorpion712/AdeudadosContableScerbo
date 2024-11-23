@@ -24,6 +24,6 @@ export const Logo = () => {
 //     </svg>
 //   );
 return (
-    <img src="https://polotecnologico.net/wp-content/uploads/2015/09/sbi_Mesa-de-trabajo-1.jpg" alt="Logo not found" width={200} height={200} />
+    <img src="logo_scerbo.png" alt="Logo not found" width={200} height={200} />
 )
 };

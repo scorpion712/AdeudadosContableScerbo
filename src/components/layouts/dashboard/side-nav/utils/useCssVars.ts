@@ -110,8 +110,8 @@ export
                         };
                     } else {
                         return {
-                            '--nav-bg': primary.darkest,
-                            '--nav-color': theme.palette.common.white,
+                            '--nav-bg': primary.dark,
+                            '--nav-color': primary.contrastText,
                             '--nav-border-color': 'transparent',
                             '--nav-logo-border': primary.darkest,
                             '--nav-section-title-color': neutral[400],
@@ -119,13 +119,13 @@ export
                             '--nav-item-hover-color': primary.darkest,
                             '--nav-item-hover-bg': primary.lightest,
                             '--nav-item-active-bg': primary.light,
-                            '--nav-item-active-color': primary.main,
+                            '--nav-item-active-color': primary.darkest,
                             '--nav-item-active-hover-color': primary.main,
                             '--nav-item-disabled-color': neutral[500],
                             '--nav-item-disable-hover-bg': primary.lightest,
                             '--nav-item-icon-color': primary.contrastText,
                             '--nav-item-icon-hover-color': primary.main,
-                            '--nav-item-icon-active-color': primary.main,
+                            '--nav-item-icon-active-color': primary.darkest,
                             '--nav-item-icon-disabled-color': neutral[500],
                             '--nav-item-chevron-color': neutral[600],
                             '--nav-scrollbar-color': neutral[400],

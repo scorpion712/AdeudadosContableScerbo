@@ -1,4 +1,4 @@
-import { Box, Container, Grid2, LinearProgress, Link, Stack, Typography } from "@mui/material";
+import { Box, Container, Grid2, LinearProgress, Stack, Typography } from "@mui/material";
 import * as Yup from 'yup';
 import { Form, Formik } from "formik";
 import { useEffect } from "react";
@@ -31,13 +31,15 @@ const LoginPage = () => {
   const { loading, callEndpoint } = useService<LoginResponse>();
 
   const handleFormSubmit = async (values: LoginFormValues) => {
-    const response = await callEndpoint(await authService.logIn(values.email, values.password));
-    if (response) {
-      auth.signIn(response.data);
-      navigateToHome();
-    } else {
-      SnackBarUtilities.error("Error al iniciar sesión");
-    }
+    // TO DO: Firebase validation
+    // const response = await callEndpoint(await authService.logIn(values.email, values.password));
+    // if (response) {
+    //   auth.signIn(response.data);
+    //   navigateToHome();
+    // } else {
+    //   SnackBarUtilities.error("Error al iniciar sesión");
+    // }
+    router.push(paths.index);
   }
 
   const navigateToHome = () => {
@@ -61,7 +63,7 @@ const LoginPage = () => {
           alignItems: 'center',
           display: 'flex',
           flexGrow: 1,
-          p: 5
+          p: 5  
         }}
       >
         <Container maxWidth="lg">
@@ -69,14 +71,15 @@ const LoginPage = () => {
             <Grid2 size={12}>
               <Typography variant="h3" mt={{ xs: 0, md: 4 }} gutterBottom>Bienvenido</Typography>
               <Stack direction={"row"} mt={2} mb={{ xs: 2, md: 4 }}  >
-                <Typography variant="body1" color={primary.alpha50} fontSize={{ xs: '14px', md: "18px" }}>¿Todavía no estas registrado?</Typography>
+              <Typography variant="body1" color={primary.alpha50} fontSize={{ xs: '14px', md: "18px" }}>Inicia sesión para continuar</Typography>
+                {/* <Typography variant="body1" color={primary.alpha50} fontSize={{ xs: '14px', md: "18px" }}>¿Todavía no estas registrado?</Typography>
                 <Link variant="body1"
                   href={paths.auth.register.index}
                   sx={{ color: primary.main, fontWeight: "650" }}
                   fontSize={{ xs: '14px', md: "18px" }}
                   ml={0.5}>
                   Registrate
-                </Link>
+                </Link> */}
               </Stack>
               {loading ?
                 <Box>
@@ -92,9 +95,9 @@ const LoginPage = () => {
                     <LoginForm />
                   </Form>
                 </Formik>}
-              <Stack mt={2}>
+              {/* <Stack mt={2}>
                 <Link href={paths.auth.resetPwd} color={primary.main}>¿Olvidaste tu contraseña?</Link>
-              </Stack>
+              </Stack> */}
             </Grid2>
           </Grid2>
         </Container>

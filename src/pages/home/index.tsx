@@ -19,7 +19,7 @@ const Page = () => {
       >
         <Container maxWidth="lg">
           <Typography gutterBottom variant="h4" component="h2">
-            Bienvenido a React Dashboard Template
+            Bienvenido a Estudio Contable Paula Scerbo Adeudados
           </Typography>
         </Container>
       </Box>
