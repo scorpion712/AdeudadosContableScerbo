@@ -4,11 +4,12 @@ import Stack from '@mui/material/Stack';
 
 import { useLocation } from 'react-router-dom';
 import { settings } from '../../../../theme/settings';
-import { Scrollbar } from '../../../Scrollbar'; 
+import { Scrollbar } from '../../../Scrollbar';
 import { useSections } from './config';
 import { SideNavSection } from './SideNavSection';
 import { useCssVars } from './utils/useCssVars';
 import { Divider, Typography } from '@mui/material';
+import { Logo } from '../../../Logo';
 
 const SIDE_NAV_WIDTH = 280;
 
@@ -53,7 +54,7 @@ export const SideNav = () => {
                         spacing={2}
                         sx={{ p: 3 }}
                     >
-                        {/* <Logo /> */}
+                        <Logo />
                     </Stack>
                     <Stack
                         component="nav"
