@@ -5,3 +5,4 @@ export * from './auth';
 export * from './Scrollbar';
 export * from './Logo';
 export * from './auth';
+export * from './home';
