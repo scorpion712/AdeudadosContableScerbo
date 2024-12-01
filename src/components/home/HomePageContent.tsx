@@ -3,6 +3,7 @@ import { Box, Button, CircularProgress, Grid2, InputAdornment, OutlinedInput, Pa
 import { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import SearchIcon from '@mui/icons-material/Search';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 import { SnackBarUtilities } from "../../utils";
 import { Customer } from "../../models";
@@ -104,7 +105,7 @@ export const HomePageContent = () => {
 
 
     return (
-        <Paper sx={{ width: '100%', p: 2, minHeight: 400 }}>
+        <Paper sx={{ width: '100%', p: 2, minHeight: 100, display: sheetsData.length > 0 ? 'inherit' : 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {
                 sheetsData.length > 0 &&
                 <Typography variant="h5" gutterBottom>
@@ -113,16 +114,26 @@ export const HomePageContent = () => {
             }
             <Grid2 container spacing={2} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Grid2 size={{ xs: 12 }}>
-                    <Button variant="contained"
-                        component='label'>
-                        Cargar Excel
-                        <input
-                            type="file"
-                            accept=".xlsx,.xls"
-                            hidden
-                            onChange={handleFileUpload}
-                        />
-                    </Button>
+                    <Stack spacing={2} direction={'row'}>
+                        <Button variant="contained"
+                            component='label'>
+                            Cargar Excel
+                            <input
+                                type="file"
+                                accept=".xlsx,.xls"
+                                hidden
+                                onChange={handleFileUpload}
+                            />
+                        </Button>
+                        {
+                            sheetsData.length > 0 &&
+                            <Button
+                                variant="outlined"
+                                color="error"
+                                startIcon={<DeleteOutlineIcon />}
+                                onClick={() => setCustomers([])}>Vaciar</Button>
+                        }
+                    </Stack>
                 </Grid2>
                 {
                     sheetsData.length > 0 &&
