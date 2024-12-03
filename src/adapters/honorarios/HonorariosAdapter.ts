@@ -32,12 +32,12 @@ export const adaptHonorariosData = (data: any[], customers: Customer[]) => {
 
                 if (column >= 2) {
                     if (customer) {
-                        period += 1;
                         if (mesesAdeudados[period]) {
                             const customerDeubt = customer.adeudados.find(a => a.period.getTime() === mesesAdeudados[period].getTime())
                             if (customerDeubt)
                                 customerDeubt.honorarios = value;
                         }
+                        period += 1;
                     }
                 }
             });
