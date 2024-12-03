@@ -77,7 +77,7 @@ export const HomePageContent = () => {
     };
 
 
-    useEffect(() => {
+    useEffect(() => { 
         if (sheetsData.length > 0)
             handleSheetsData(sheetsData);
     }, [sheetsData]);
@@ -103,6 +103,10 @@ export const HomePageContent = () => {
         setCustomers(adaptHonorariosData(sheetsData.find((sheet) => sheet.sheetName === "Honorarios")?.data as any[], [...responsablesInscriptos, ...monotributistas]))
     }
 
+    const handleRemoveCustomers = () => {
+        setCustomers([]);
+        setSheetsData([]);
+    }
 
     return (
         <Paper sx={{ width: '100%', p: 2, minHeight: 100, display: sheetsData.length > 0 ? 'inherit' : 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -131,7 +135,7 @@ export const HomePageContent = () => {
                                 variant="outlined"
                                 color="error"
                                 startIcon={<DeleteOutlineIcon />}
-                                onClick={() => setCustomers([])}>Vaciar</Button>
+                                onClick={handleRemoveCustomers}>Vaciar</Button>
                         }
                     </Stack>
                 </Grid2>

@@ -1,9 +1,12 @@
 import { WhatsApp } from "@mui/icons-material";
 import { IconButton, Paper, SvgIcon, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip } from "@mui/material"
 import { useState } from "react";
+import DetailsIcon from '@mui/icons-material/Details';
 
 import { primary } from "../../theme/colors";
 import { Customer } from "../../models";
+import { usePopUp } from "../../hooks";
+import { CustomerDetail } from "./CustomerDetail";
 
 interface CustomersTableContainerProps {
     customers: Customer[];
@@ -14,8 +17,10 @@ export const CustomersTableContainer = (props: CustomersTableContainerProps) => 
 
     const { customers, search } = props;
 
+    const { showPopUp } = usePopUp();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+
     const handleChangePage = (_event: unknown, newPage: number) => {
         setPage(newPage);
     };
@@ -24,6 +29,10 @@ export const CustomersTableContainer = (props: CustomersTableContainerProps) => 
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
+    const showCustomerDetail = (customer: Customer) => {
+        showPopUp(customer.name, <CustomerDetail customer={customer} />, "md");
+    }
 
     return (
         <Paper sx={{ width: '100%', p: 2, minHeight: 400 }}>
@@ -49,6 +58,13 @@ export const CustomersTableContainer = (props: CustomersTableContainerProps) => 
                                     <TableCell>{customer.category}</TableCell>
                                     <TableCell>{customer.phone}</TableCell>
                                     <TableCell>
+                                        <Tooltip title="Ver detalle">
+                                            <IconButton onClick={() => showCustomerDetail(customer)}>
+                                                <SvgIcon>
+                                                    <DetailsIcon color="secondary" />
+                                                </SvgIcon>
+                                            </IconButton>
+                                        </Tooltip>
                                         <Tooltip title="Envíar pdf por WhatsApp">
                                             <IconButton onClick={() => console.log("Enviar pdf por WhatsApp")}>
                                                 <SvgIcon>
@@ -74,6 +90,6 @@ export const CustomersTableContainer = (props: CustomersTableContainerProps) => 
                 labelDisplayedRows={({ from, to }) => `${from}-${to} de ${customers.length}`}
             />
 
-        </Paper>
+        </Paper >
     );
 };
