@@ -6,6 +6,7 @@ import { AuthProvider } from './context/auth';
 import { createTheme } from './theme';
 import { settings } from './theme/settings';
 import { CssBaseline, ThemeProvider } from '@mui/material';
+import { PopUpProvider } from './context';
 
 function App() {
   const element = useRoutes(routes);
@@ -16,10 +17,12 @@ function App() {
     <SnackbarProvider>
       <SnackBarUtilitiesConfigurator />
       <AuthProvider>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {element}
-        </ThemeProvider>
+        <PopUpProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            {element}
+          </ThemeProvider>
+        </PopUpProvider>
       </AuthProvider>
     </SnackbarProvider>
   )
