@@ -8,3 +8,4 @@ export * from './auth';
 export * from './home';
 export * from './CustomPopUp';
 export * from './customers';
+export * from './CustomPopover';

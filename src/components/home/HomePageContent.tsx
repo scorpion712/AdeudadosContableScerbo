@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Box, Button, CircularProgress, Grid2, InputAdornment, OutlinedInput, Paper, Stack, SvgIcon, Typography } from "@mui/material"
+import { Box, Button, CircularProgress, FormControl, Grid2, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Paper, Select, SelectChangeEvent, Stack, SvgIcon, Tooltip, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import SearchIcon from '@mui/icons-material/Search';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 import { SnackBarUtilities } from "../../utils";
 import { Customer } from "../../models";
@@ -12,6 +13,7 @@ import { adaptResponsablesInscriptosData } from "../../adapters/responsables/Res
 import { adaptMonotributistasData } from "../../adapters/monotributistas/MonotributistasAdapter";
 import { adaptHonorariosData } from "../../adapters/honorarios/HonorariosAdapter";
 import { CustomersTableContainer } from "../customers/CustomersTableContainer";
+import { CustomPopover } from "../CustomPopover";
 
 
 interface SheetData {
@@ -25,6 +27,20 @@ export const HomePageContent = () => {
     const [reading, setReading] = useState(false);
     const [customers, setCustomers] = useState<Customer[]>([]);
     const [search, setSearch] = useState("");
+    const [category, setCategory] = useState("");
+
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+    const [open, setOpen] = useState(false);
+
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+        setOpen(true);
+    };
+
+    const handleChange = (event: SelectChangeEvent<string>) => {
+        setCategory(event.target.value);
+    }
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         if (e.target.value.length >= 3) {
@@ -77,7 +93,7 @@ export const HomePageContent = () => {
     };
 
 
-    useEffect(() => { 
+    useEffect(() => {
         if (sheetsData.length > 0)
             handleSheetsData(sheetsData);
     }, [sheetsData]);
@@ -157,10 +173,38 @@ export const HomePageContent = () => {
                                 onChange={handleSearchChange}
                                 sx={{ flexGrow: 1 }}
                             />
+                            <Tooltip title="Filtrar clientes">
+                                <IconButton onClick={(event) => handleClick(event)}>
+                                    <SvgIcon>
+                                        <FilterAltIcon />
+                                    </SvgIcon>
+                                </IconButton>
+                            </Tooltip>
                         </Stack>
-                        <CustomersTableContainer customers={customers} search={search} />
+                        <CustomersTableContainer customers={category ? customers.filter(customer => customer.category.toLowerCase() === category.toLowerCase()) : customers} search={search} />
                     </Grid2>
                 }
+                <CustomPopover open={open}
+                    anchorEl={anchorEl}
+                    handleClose={() => setOpen(false)} >
+                    <Stack sx={{ p: 2, width: "300px" }} spacing={3}>
+                        <Typography variant="h6" gutterBottom>Filtrar clientes</Typography>
+                        <FormControl fullWidth>
+                            <InputLabel>Categoría</InputLabel>
+                            <Select
+                                value={category}
+                                label="Categoría"
+                                onChange={(e) => handleChange(e)}
+                            >
+                                <MenuItem value={"Monotributista"}>Monotributista</MenuItem>
+                                <MenuItem value={"Responsable Inscripto"}>Responsable Inscripto</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <Button variant="outlined" color="error" onClick={() => setCategory("")}>
+                            Limpiar
+                        </Button>
+                    </Stack>
+                </CustomPopover>
             </Grid2>
         </Paper>
     );
