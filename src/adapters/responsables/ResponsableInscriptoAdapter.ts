@@ -4,7 +4,8 @@ import { excelSerialToDate } from "../../utils";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptResponsablesInscriptosData = (data: any[], customers: Customer[]) => {
     const responsablesInscriptos = [] as Customer[];
-    const mesesAdeudados = [] as Date[];
+    const mesesAdeudados = [] as Date[]; 
+    if (!data) return responsablesInscriptos;
     data.forEach((row, index) => {
         // fila de meses a liquidar
         if (index == 0) {
