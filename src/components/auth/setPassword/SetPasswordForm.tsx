@@ -9,6 +9,7 @@ import { CheckActivationTokenResponse, SetPasswordFormValues, SetUserPasswordReq
 import { paths } from "../../../routes/paths";
 import { userService } from "../../../services";
 import SetPasswordFormBody from "./SetPasswordFormBody";
+import { primary } from "../../../theme/colors";
 
 const formInitialValues = {
     password: '',
@@ -58,7 +59,7 @@ export const SetPasswordForm = () => {
             {
                 loading || checkingActivationToken ?
                     <Box>
-                        <LinearProgress sx={{ mt: 5 }} />
+                        <LinearProgress sx={{ mt: 5, color: primary.main  }} />
                     </Box>
                     : activationError
                         ? <Typography variant="body1" color="error">Ha ocurrido un error verificando el token</Typography>

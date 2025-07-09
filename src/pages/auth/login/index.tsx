@@ -1,4 +1,4 @@
-import { Box, Container, Grid2, LinearProgress, Link, Stack, Typography } from "@mui/material";
+import { Box, Container, Grid2, LinearProgress, Stack, Typography } from "@mui/material";
 import * as Yup from 'yup';
 import { Form, Formik } from "formik";
 import { useEffect } from "react";
@@ -8,9 +8,10 @@ import { LoginForm, Seo } from "../../../components";
 import { paths } from "../../../routes/paths";
 import { LoginFormValues, LoginResponse } from "../../../models";
 import { useRouter, useService, useAuth } from "../../../hooks";
-import { authService } from "../../../services";
 import { primary } from "../../../theme/colors";
+import { authService } from "../../../services";
 import { SnackBarUtilities } from "../../../utils";
+// import { SnackBarUtilities } from "../../../utils";
 
 const formInitialValues = {
   email: "",
@@ -19,7 +20,7 @@ const formInitialValues = {
 
 const formValidationSchema = Yup.object({
   email: Yup.string().email('Ingrese un email válido').max(255).required('El email es requerido'),
-  password: Yup.string().min(4, "La contraseña debe tener al menos 4 caracteres").max(8, "La contraseña puede tener hasta 8 caracteres").required('La contraseña es requerida'),
+  password: Yup.string().min(4, "La contraseña debe tener al menos 4 caracteres").max(12, "La contraseña puede tener hasta 12 caracteres").required('La contraseña es requerida'),
 });
 
 const LoginPage = () => {
@@ -28,16 +29,18 @@ const LoginPage = () => {
   const router = useRouter();
   const location = useLocation();
 
-  const { loading, callEndpoint } = useService<LoginResponse>();
+  const { loading } = useService<LoginResponse>();
 
   const handleFormSubmit = async (values: LoginFormValues) => {
-    const response = await callEndpoint(await authService.logIn(values.email, values.password));
+
+    const response = await authService.logIn(values.email, values.password);
     if (response) {
-      auth.signIn(response.data);
+      auth.signIn(response);
       navigateToHome();
     } else {
       SnackBarUtilities.error("Error al iniciar sesión");
     }
+    router.push(paths.index);
   }
 
   const navigateToHome = () => {
@@ -69,18 +72,19 @@ const LoginPage = () => {
             <Grid2 size={12}>
               <Typography variant="h3" mt={{ xs: 0, md: 4 }} gutterBottom>Bienvenido</Typography>
               <Stack direction={"row"} mt={2} mb={{ xs: 2, md: 4 }}  >
-                <Typography variant="body1" color={primary.alpha50} fontSize={{ xs: '14px', md: "18px" }}>¿Todavía no estas registrado?</Typography>
+                <Typography variant="body1" color={primary.alpha50} fontSize={{ xs: '14px', md: "18px" }}>Inicia sesión para continuar</Typography>
+                {/* <Typography variant="body1" color={primary.alpha50} fontSize={{ xs: '14px', md: "18px" }}>¿Todavía no estas registrado?</Typography>
                 <Link variant="body1"
                   href={paths.auth.register.index}
                   sx={{ color: primary.main, fontWeight: "650" }}
                   fontSize={{ xs: '14px', md: "18px" }}
                   ml={0.5}>
                   Registrate
-                </Link>
+                </Link> */}
               </Stack>
               {loading ?
                 <Box>
-                  <LinearProgress sx={{ mt: 5 }} />
+                  <LinearProgress sx={{ mt: 5, color: primary.main  }} />
                 </Box>
                 :
                 <Formik
@@ -92,9 +96,9 @@ const LoginPage = () => {
                     <LoginForm />
                   </Form>
                 </Formik>}
-              <Stack mt={2}>
+              {/* <Stack mt={2}>
                 <Link href={paths.auth.resetPwd} color={primary.main}>¿Olvidaste tu contraseña?</Link>
-              </Stack>
+              </Stack> */}
             </Grid2>
           </Grid2>
         </Container>

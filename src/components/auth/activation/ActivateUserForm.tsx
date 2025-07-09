@@ -9,6 +9,7 @@ import { ActivateUserFormValues, ActivateUserRequest, ActivateUserResponse, Chec
 import { useRouter, useService } from '../../../hooks';
 import { userService } from '../../../services';
 import { paths } from '../../../routes/paths';
+import { primary } from '../../../theme/colors';
 
 const formInitialValues = {
     password: '',
@@ -58,7 +59,7 @@ function ActivateUserForm() {
             {
                 loading || checkingActivationToken ?
                     <Box>
-                        <LinearProgress sx={{ mt: 5 }} />
+                        <LinearProgress sx={{ mt: 5, color: primary.main }} />
                     </Box>
                     : activationError ? <Typography variant="body1" color="error">Ha ocurrido un error verificando el token</Typography> :
                         <Formik initialValues={formInitialValues}

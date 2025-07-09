@@ -7,6 +7,7 @@ import { RegisterUserRequest, RegistrationFormValues, RegisterUserResponse } fro
 import { userService } from "../../../services";
 import { RegistrationFormBody } from "./RegistrationFormBody";
 import { paths } from "../../../routes/paths";
+import { primary } from "../../../theme/colors";
 
 const formInitialValues = {
     email: "",
@@ -19,7 +20,7 @@ const formValidationSchema = Yup.object({
     email: Yup.string().email('Ingrese un email válido').max(255).required('El email es requerido'),
     firstName: Yup.string().max(255).required('El nombre es requerido'),
     lastName: Yup.string().max(255).required('El apellido es requerido'),
-    password: Yup.string().min(4, "La contraseña debe tener al menos 4 caracteres").max(8, "La contraseña puede tener hasta 8 caracteres").required('La contraseña es requerida'),
+    password: Yup.string().min(4, "La contraseña debe tener al menos 4 caracteres").max(12, "La contraseña puede tener hasta 12 caracteres").required('La contraseña es requerida'),
 });
 
 
@@ -45,7 +46,7 @@ export const RegistrationForm = () => {
             {
                 loading ?
                     <Box>
-                        <LinearProgress sx={{ mt: 5 }} />
+                        <LinearProgress sx={{ mt: 5, color: primary.main  }} />
                     </Box>
                     :
                     <Formik

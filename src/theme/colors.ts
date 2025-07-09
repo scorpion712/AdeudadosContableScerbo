@@ -34,11 +34,11 @@ export const neutral = {
 };
 
 export const primary = withAlphas({
-  lightest: '#A7C6E7', // A light shade derived from #1F78BC
-  light: '#1F78BC',     // Light shade (your provided color)
-  main: '#05294D',      // Main color (your provided color)
-  dark: '#001B36',      // Darker shade derived from #05294D
-  darkest: '#000D20',   // Darkest shade derived from #05294D
+  lightest: '#D1A9E7',  // Lightest shade derived from #B575D7
+  light: '#B575D7',      // Light shade (your provided color)
+  main: '#9A4EC0',       // Main color (a deeper tone of #B575D7)
+  dark: '#6D3C97',       // Darker shade derived from #B575D7
+  darkest: '#44216D',    // Darkest shade derived from #B575D7
   contrastText: '#FFFFFF', // Text color for contrast
 });
 

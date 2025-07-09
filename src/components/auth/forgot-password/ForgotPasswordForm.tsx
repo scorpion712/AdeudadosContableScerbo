@@ -9,6 +9,7 @@ import { useRouter, useService } from '../../../hooks';
 import { userService } from '../../../services';
 import { SnackBarUtilities } from '../../../utils';
 import { paths } from '../../../routes/paths';
+import { primary } from '../../../theme/colors';
 
 const formInitialValues = {
     email: "",
@@ -38,7 +39,7 @@ function ForgotPasswordForm() {
             {
                 loading
                     ? <Box>
-                        <LinearProgress sx={{ mt: 5 }} />
+                        <LinearProgress sx={{ mt: 5, color: primary.main  }} />
                     </Box>
                     :
                     <Formik initialValues={formInitialValues}
