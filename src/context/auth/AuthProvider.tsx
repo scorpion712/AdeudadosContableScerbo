@@ -1,15 +1,16 @@
-import { ReactNode, useCallback, useEffect, useReducer } from 'react';
+import { ReactNode, useCallback, useEffect, useReducer, useState } from 'react';
 
 import { AuthContextAction, AuthContextActionType, AuthContextState } from './models';
 import { AuthContext, initialState } from './AuthContext';
 import authReducer from './reducers/AuthReducer'; 
 import { cleanLocalStorage, getLocalStorage, persistLocalStorage, SnackBarUtilities, USER_KEY } from '../../utils'; 
 import { adaptLoginReponseToAuthUser, adaptAuthUserToUserModel } from '../../adapters/auth';
-import { LoginResponse } from '../../models';
+import { User } from 'firebase/auth';
 
 export const AuthProvider = (props: { children: ReactNode | ReactNode[] }) => {
     const { children } = props;
     const [state, dispatch] = useReducer(authReducer, initialState);
+    const [loading, setLoading] = useState(true);
 
     const initialize = useCallback(async () => {
         try {
@@ -33,6 +34,7 @@ export const AuthProvider = (props: { children: ReactNode | ReactNode[] }) => {
                 },
             });
         }
+        setLoading(false);
     }, [dispatch]);
 
     useEffect(
@@ -44,17 +46,19 @@ export const AuthProvider = (props: { children: ReactNode | ReactNode[] }) => {
     );
 
     const signIn = useCallback(
-        async (response: LoginResponse) => {
+        async (response: User) => { 
             if (!response) return;
-            const user = adaptLoginReponseToAuthUser(response);
+            setLoading(true);
+            const user = await adaptLoginReponseToAuthUser(response);
             persistLocalStorage(USER_KEY, user);
-
+ 
             dispatch({
                 type: AuthContextActionType.SIGN_IN,
                 payload: {
                     user: adaptAuthUserToUserModel(user),
                 },
             } as AuthContextAction<AuthContextState>);
+            setLoading(false);
         },
         [dispatch]
     );
@@ -70,6 +74,7 @@ export const AuthProvider = (props: { children: ReactNode | ReactNode[] }) => {
                 ...state, 
                 signIn,
                 signOut,
+                loading
             }}
         >
             {children}

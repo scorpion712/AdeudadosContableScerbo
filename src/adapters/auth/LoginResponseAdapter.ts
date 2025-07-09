@@ -1,13 +1,12 @@
-import { AuthUser, LoginResponse } from "../../models/api";
+import { User } from "firebase/auth";
+import { AuthUser } from "../../models/api";
 
-export const adaptLoginReponseToAuthUser = (response: LoginResponse) => {
+export const adaptLoginReponseToAuthUser = async (response: User) => {
     return {
-        id: response.id,
+        id: response.uid,
         email: response.email,
-        name: response.name,
-        lastName: response.lastName,
-        accessToken: response.accessToken,
+        name: response.displayName ?? response.email,
+        accessToken: await response.getIdToken(),
         refreshToken: response.refreshToken,
-        role: response.role
     } as AuthUser;
 }

@@ -1,14 +1,14 @@
 import { ReactNode, useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
    
-import { paths } from '../routes/paths'; 
-import { useRouter } from '../hooks';
+import { paths } from '../routes/paths';  
 import { useAuth } from '../hooks/useAuth';
+import { useRouter } from '../hooks';
 
 export const AuthGuard = (props: { children: ReactNode | ReactNode []; }) => {
   const { children } = props;
   const router = useRouter();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, loading } = useAuth();
   const [checked, setChecked] = useState(false);
 
   // allowed routes without authentication
@@ -16,7 +16,7 @@ export const AuthGuard = (props: { children: ReactNode | ReactNode []; }) => {
     paths.auth.login,
   ];
 
-  const check = useCallback(() => {
+  const check = useCallback(() => { 
     if (!isAuthenticated && !allowedRoutes.includes(window.location.pathname)) {
       const searchParams = new URLSearchParams({ returnTo: window.location.pathname }).toString();
       const href = paths.auth.login + `?${searchParams}`;
@@ -30,10 +30,11 @@ export const AuthGuard = (props: { children: ReactNode | ReactNode []; }) => {
   // Only check on mount, this allows us to redirect the user manually when auth state changes
   useEffect(
     () => {
+      if (loading) return;
       check();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [loading]
   );
 
   if (!checked) {

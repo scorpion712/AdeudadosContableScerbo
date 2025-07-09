@@ -1,19 +1,25 @@
+
 import axios from 'axios'
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 import { APIConfig } from '../../config';
-import { getLocalStorage, persistLocalStorage, USER_KEY } from '../../utils';
-import { AxiosCall, LoginResponse } from '../../models';
+import { getLocalStorage, persistLocalStorage, USER_KEY } from '../../utils'; 
+import { firebaseAuth } from '../../libs/firebase';
 
 const logIn = async (email: string, password: string) => {
-    const controller = new AbortController();
-
-    return {
-        call: axios.post(`${APIConfig.baseURL}/Authentication/AccessToken`, {
-            email: email,
-            password: password,
-        }, { signal: controller.signal }),
-        controller
-    } as AxiosCall<LoginResponse>;
+    return await signInWithEmailAndPassword(firebaseAuth, email, password) 
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            // ... 
+            return user;
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+            return null;
+        });
 }
 
 const refreshToken = async () => {

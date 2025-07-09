@@ -6,6 +6,5 @@ export const adaptAuthUserToUserModel = (response: AuthUser) => {
         id: response.id,
         email: response.email,
         name: response.name,
-        lastName: response.lastName,
     } as User;
 }

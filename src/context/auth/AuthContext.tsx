@@ -2,7 +2,7 @@
 import { createContext } from 'react'; 
  
 import { AuthContextState } from './models';
-import { LoginResponse } from '../../models';
+import { User } from 'firebase/auth';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const initialState = {
@@ -13,6 +13,7 @@ export const initialState = {
 
 export const AuthContext = createContext({
   ...initialState, 
-  signIn: (_response: LoginResponse) => Promise.resolve(), 
+  signIn: (_response: User) => Promise.resolve(), 
   signOut: () => Promise.resolve(),
+  loading: false
 });

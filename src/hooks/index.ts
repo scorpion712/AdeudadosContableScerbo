@@ -3,3 +3,4 @@ export * from './useMobileNav';
 export * from './useAuth';
 export * from './useService';	
 export { useAsync } from './useAsync';	
+export * from './usePopUp';
