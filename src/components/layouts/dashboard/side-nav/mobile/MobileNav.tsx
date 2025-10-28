@@ -12,7 +12,7 @@ import { Logo } from '../../../../Logo';
 import { Divider } from '@mui/material';
 import { MobileNavSection } from './MobileNavSection';
 
-const MOBILE_NAV_WIDTH = 280;
+const MOBILE_NAV_WIDTH = 200;
 
 interface MobileNavProps {
     color?: string;
@@ -60,22 +60,8 @@ export const MobileNav = (props: MobileNavProps) => {
                         spacing={2}
                         sx={{ p: 3 }}
                     >
-                        <Box
-                            component={RouterLink}
-                            href={paths.index}
-                            sx={{
-                                borderColor: 'var(--nav-logo-border)',
-                                borderRadius: 1,
-                                borderStyle: 'solid',
-                                borderWidth: 1,
-                                display: 'flex',
-                                height: 40,
-                                p: '4px',
-                                width: 40,
-                            }}
-                        >
-                            <Logo />
-                        </Box>
+                        <Logo height={130}
+                            width={130} />
                     </Stack>
                     <Stack
                         component="nav"
@@ -98,7 +84,7 @@ export const MobileNav = (props: MobileNavProps) => {
             </Scrollbar>
             <Box sx={{ p: 3 }}>
                 <Divider />
-                <Typography variant="caption">
+                <Typography variant="caption" fontSize={11}>
                     Estudio Contable Paula Scerbo
                 </Typography>
             </Box>

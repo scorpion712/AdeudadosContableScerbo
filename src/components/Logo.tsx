@@ -1,5 +1,5 @@
 
-export const Logo = ({width, height} : {width?: number, height?: number}) => {
+export const Logo = ({ width, height }: { width?: number, height?: number }) => {
     //TODO: implement logo svg
     //   const theme = useTheme();
     //   const fillColor = theme.palette.primary.main;
@@ -24,6 +24,12 @@ export const Logo = ({width, height} : {width?: number, height?: number}) => {
     //     </svg>
     //   );
     return (
-        <img src="logo_scerbo.png" alt="Logo not found" width={width? width : 200} height={height ? height : 200} style={{ opacity: .85 }} />
+        <img src="logo_contable_scerbo.png"
+            alt="Logo not found"
+            width={width ? width : 170}
+            height={height ? height : 170}
+            style={{
+                paddingLeft: 4
+            }}  />
     )
 };

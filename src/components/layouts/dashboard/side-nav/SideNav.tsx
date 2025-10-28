@@ -11,7 +11,7 @@ import { useCssVars } from './utils/useCssVars';
 import { Divider, Typography } from '@mui/material';
 import { Logo } from '../../../Logo';
 
-const SIDE_NAV_WIDTH = 280;
+const SIDE_NAV_WIDTH = 250;
 
 export const SideNav = () => {
     const pathname = useLocation().pathname ?? "";

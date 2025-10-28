@@ -1,10 +1,12 @@
 import { ReactNode } from 'react';
-import { Box, Grid2 } from '@mui/material';
+import { Box, Grid2, useMediaQuery, useTheme } from '@mui/material';
 import { primary } from '../../../theme/colors';
 
 export const Layout = (props: { children: ReactNode | ReactNode[] }) => {
     const { children } = props;
-
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm')); 
+    
     return (
         <Grid2
             container
@@ -22,11 +24,14 @@ export const Layout = (props: { children: ReactNode | ReactNode[] }) => {
                 <Box sx={{
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center", 
+                    justifyContent: "center",
+                    padding: 4
                 }}>
-                    <img src="../logo_scerbo.png" alt="img not found" style={{
-                        width: "100%",
-                    }} />
+                    <img src="../logo_contable_scerbo.png" alt="img not found"
+                        style={{
+                            width: "100%",
+                            height: isMobile ? "150px" : "400px",   
+                        }} />
                 </Box>
             </Grid2>
             <Grid2 size={{ xs: 12, lg: 4 }}

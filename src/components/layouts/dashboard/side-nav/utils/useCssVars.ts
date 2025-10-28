@@ -110,7 +110,7 @@ export
                         };
                     } else {
                         return {
-                            '--nav-bg': primary.dark,
+                            '--nav-bg': primary.lightest,
                             '--nav-color': primary.contrastText,
                             '--nav-border-color': 'transparent',
                             '--nav-logo-border': primary.darkest,
